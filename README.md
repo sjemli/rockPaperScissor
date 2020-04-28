@@ -12,6 +12,13 @@ And at each round the human player must input his Move choice :
 The computer choices are random.
 
 To launch the game, you need to run the class Game that contains the main() method.
+or
+you can build the project using : 
+- cd RockPaperScissor
+- mvn clean install
+- cd target
+-  java -jar rock-paper-scissors-1.0-SNAPSHOT.jar
+ 
 ###Technical Choices :
 
 Java 11
