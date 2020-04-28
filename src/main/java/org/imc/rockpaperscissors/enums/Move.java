@@ -7,22 +7,24 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum Move implements Comparable<Move> {
+public enum Move {
     ROCK('R'), PAPER('P'), SCISSORS('S');
 
-    private final char mnemonic;
+    private static final EnumMap<Move, Move> strongerToWeakerMoveMap = new EnumMap<>(Move.class);
 
-    private static EnumMap<Move, Move> strongerToWeakerMoveMap = new
-            EnumMap<>(Move.class);
-
-    private static final Map<Character, Move> mnemonicToMoveMap = Arrays.stream(values())
-            .collect(Collectors.toMap(e -> e.mnemonic, Function.identity()));
+    private static final Map<Character, Move> mnemonicToMoveMap;
 
     static {
+        mnemonicToMoveMap = Arrays.stream(values())
+                .collect(Collectors
+                        .toMap(e -> e.mnemonic, Function.identity()));
+
         strongerToWeakerMoveMap.put(ROCK, SCISSORS);
         strongerToWeakerMoveMap.put(PAPER, ROCK);
         strongerToWeakerMoveMap.put(SCISSORS, PAPER);
     }
+
+    private final char mnemonic;
 
     Move(char mnemonic) {
         this.mnemonic = mnemonic;
