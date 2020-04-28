@@ -57,13 +57,17 @@ public class Game {
     }
 
     public void play() {
-        maximumNumberOfRounds = consoleReader.readNumberOfRounds(MAXIMUM_NUMBER_OF_ROUNDS_MESSAGE);
-        System.out.printf("You will play %s rounds %n", maximumNumberOfRounds);
+        fillMaximumNumberOfRounds();
 
         IntStream.rangeClosed(1, maximumNumberOfRounds).forEach(this::playRound);
 
         System.out.printf("Final Score :%n Player ==> %s  ,Computer ==> %s , after %s rounds", humanPlayer.getScore(),
                 computerPlayer.getScore(), maximumNumberOfRounds);
+    }
+
+    private void fillMaximumNumberOfRounds() {
+        maximumNumberOfRounds = consoleReader.readNumberOfRounds(MAXIMUM_NUMBER_OF_ROUNDS_MESSAGE);
+        System.out.printf("You will play %s rounds %n", maximumNumberOfRounds);
     }
 
     int getMaximumNumberOfRounds() {
@@ -73,7 +77,6 @@ public class Game {
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
-
     }
 
 }

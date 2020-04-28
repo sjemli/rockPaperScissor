@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.util.reflection.FieldSetter;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Random;
@@ -23,8 +23,8 @@ class ComputerPlayerTest {
 
     @Mock
     private Random randomMock;
-    @InjectMocks
-    private ComputerPlayer computerPlayer;
+
+    private ComputerPlayer computerPlayer = new ComputerPlayer();
 
 
     private static Stream<Arguments> argumentsProvider() {
@@ -37,8 +37,9 @@ class ComputerPlayerTest {
 
     @ParameterizedTest(name = "should_choice_be_{1}_when_random_number_is_{0}")
     @MethodSource("argumentsProvider")
-    public void should_computer_choice_depend_on_random_number_mod_3(int generatedNumber, Move expectedChoice) {
+    public void should_computer_choice_depend_on_random_number_mod_3(int generatedNumber, Move expectedChoice) throws NoSuchFieldException {
         //Given
+        FieldSetter.setField(computerPlayer, computerPlayer.getClass().getDeclaredField("random"), randomMock);
         when(randomMock.nextInt()).thenReturn(generatedNumber);
         //When
         Move computerPlayerChoice = computerPlayer.getChoice();
