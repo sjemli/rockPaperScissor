@@ -1,6 +1,7 @@
-package players;
+package org.imc.rockpaperscissors.players;
 
-import enums.Move;
+
+import org.imc.rockpaperscissors.enums.Move;
 
 public abstract class Player {
 

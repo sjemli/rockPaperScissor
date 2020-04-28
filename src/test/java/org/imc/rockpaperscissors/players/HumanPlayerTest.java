@@ -1,30 +1,31 @@
-package players;
+package org.imc.rockpaperscissors.players;
 
-import enums.Move;
-import game.ConsoleReader;
-import org.junit.jupiter.api.BeforeEach;
+import org.imc.rockpaperscissors.enums.Move;
+import org.imc.rockpaperscissors.game.ConsoleReader;
 import org.junit.jupiter.api.Test;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class HumanPlayerTest {
 
-
+    @Mock
     private ConsoleReader consoleReader;
-    private Player humanPlayer;
+    @InjectMocks
+    private HumanPlayer humanPlayer;
 
-    @BeforeEach
-    private void init(){
-        consoleReader = mock(ConsoleReader.class);
-        humanPlayer = new HumanPlayer(consoleReader);
-    }
+
     @Test
     public void should_return_SCISSOR_hen_input_is_s() {
         //Given
-        when(consoleReader.readPlayerInput(anyString())).thenReturn('S');
+        when(consoleReader.readPlayerMove(anyString())).thenReturn('S');
         //when
         Move playerMove = humanPlayer.getChoice();
         //then
@@ -34,7 +35,7 @@ class HumanPlayerTest {
     @Test
     public void should_return_ROCK_hen_input_is_r() {
         //Given
-        when(consoleReader.readPlayerInput(anyString())).thenReturn('R');
+        when(consoleReader.readPlayerMove(anyString())).thenReturn('R');
         //when
         Move playerMove = humanPlayer.getChoice();
         //then
@@ -44,7 +45,7 @@ class HumanPlayerTest {
     @Test
     public void should_return_PAPER_hen_input_is_p() {
         //Given
-        when(consoleReader.readPlayerInput(anyString())).thenReturn('P');
+        when(consoleReader.readPlayerMove(anyString())).thenReturn('P');
         //when
         Move playerMove = humanPlayer.getChoice();
         //then

@@ -1,13 +1,14 @@
-package players;
+package org.imc.rockpaperscissors.players;
 
-import enums.Move;
-import game.ConsoleReader;
+
+import org.imc.rockpaperscissors.enums.Move;
+import org.imc.rockpaperscissors.game.ConsoleReader;
 
 import java.util.Optional;
 
 public class HumanPlayer extends Player {
 
-    public static final String MOVE_INPUT_MESSAGE = "Enter move code : R => Rock, P => Paper, S => Scissors";
+    private static final String HUMAN_MOVE_INPUT_MESSAGE = "Enter move code : R => Rock, P => Paper, S => Scissors";
     private final ConsoleReader consoleReader;
 
     public HumanPlayer(ConsoleReader consoleReader) {
@@ -15,7 +16,7 @@ public class HumanPlayer extends Player {
     }
 
     public HumanPlayer() {
-        this.consoleReader = new ConsoleReader();
+        this(new ConsoleReader());
     }
 
     @Override
@@ -23,7 +24,7 @@ public class HumanPlayer extends Player {
 
         Optional<Move> move = Optional.empty();
         while (!move.isPresent()) {
-            move = Move.fromMnemonic(consoleReader.readPlayerInput(MOVE_INPUT_MESSAGE));
+            move = Move.fromMnemonic(consoleReader.readPlayerMove(HUMAN_MOVE_INPUT_MESSAGE));
         }
         return move.get();
     }

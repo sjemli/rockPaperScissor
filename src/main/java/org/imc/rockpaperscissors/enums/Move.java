@@ -1,4 +1,4 @@
-package enums;
+package org.imc.rockpaperscissors.enums;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -17,7 +17,6 @@ public enum Move implements Comparable<Move> {
 
     private static final Map<Character, Move> mnemonicToMoveMap = Arrays.stream(values())
             .collect(Collectors.toMap(e -> e.mnemonic, Function.identity()));
-    public static Move[] values = values();
 
     static {
         strongerToWeakerMoveMap.put(ROCK, SCISSORS);
@@ -36,12 +35,5 @@ public enum Move implements Comparable<Move> {
     public boolean beats(Move opponentMove) {
         return strongerToWeakerMoveMap.get(this) == opponentMove;
     }
-
-
-/*   public int compare(Move opponentMove) {
-        if (opponentMove == this) return 0;
-        else if (strongerToWeakerMoveMap.get(this) == opponentMove) return 1;
-        return -1;
-    }*/
 
 }

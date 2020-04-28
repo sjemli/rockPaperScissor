@@ -1,33 +1,30 @@
-package players;
+package org.imc.rockpaperscissors.players;
 
-import enums.Move;
-import org.junit.jupiter.api.BeforeAll;
+import org.imc.rockpaperscissors.enums.Move;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
-import static enums.Move.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Mockito.mock;
+import static org.imc.rockpaperscissors.enums.Move.*;
 import static org.mockito.Mockito.when;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(MockitoExtension.class)
 class ComputerPlayerTest {
 
+    @Mock
     private Random randomMock;
-    private Player computerPlayer;
-
-    @BeforeAll
-    private void init() {
-        randomMock = mock(Random.class);
-        computerPlayer = new ComputerPlayer(randomMock);
-    }
+    @InjectMocks
+    private ComputerPlayer computerPlayer;
 
 
     private static Stream<Arguments> argumentsProvider() {
